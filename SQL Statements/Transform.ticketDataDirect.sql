@@ -1,9 +1,9 @@
-ALTER PROCEDURE [Transform].[ProcessData]
+ALTER PROCEDURE [Transform].[ProcessDataDirect]
 AS
 BEGIN
 	SET NOCOUNT ON;
-	--DROP PRICES LOWER THAN 10USD 
-	DROP TABLE IF EXISTS Transform.ticketData
+
+	DROP TABLE IF EXISTS Transform.ticketDataDirect
 	SELECT 
 		Origin
 		,Dest
@@ -14,11 +14,12 @@ BEGIN
 		,Year
 		,Quarter
 	INTO
-		Transform.ticketData
+		Transform.ticketDataDirect
 	FROM 
 		dbo.market_import_data
 	WHERE 
 		MktFare > 10
+		AND MktCoupons = 1
 
 	--SELECT * FROM Transform.ticketData
 	DROP TABLE IF EXISTS #TICKET_AVERAGE 
@@ -30,14 +31,14 @@ BEGIN
 	INTO 
 		#TICKET_AVERAGE
 	FROM
-		Transform.ticketData
+		Transform.ticketDataDirect
 	GROUP BY
 		Origin,
 		Dest
 
 
 	-- REMOVE OUTLIERS - KEEP 90% = 1.645 STD
-	DROP TABLE IF EXISTS Transform.AveragePrice
+	DROP TABLE IF EXISTS Transform.AveragePriceDirect
 	SELECT 
 		TD.Origin
 		,TD.Dest
@@ -46,10 +47,10 @@ BEGIN
 		,SUM(MktFare*Passengers)/SUM(Passengers) AS Avg
 		,SUM(Passengers) AS Passengers
 	INTO 
-		Transform.AveragePrice
+		Transform.AveragePriceDirect
 	-- SELECT * 
 	FROM
-		Transform.ticketData TD
+		Transform.ticketDataDirect TD
 		INNER JOIN #TICKET_AVERAGE A
 			ON A.Dest = TD.Dest
 			AND A.Origin = TD.Origin
@@ -65,3 +66,6 @@ BEGIN
 
 
 END
+GO
+
+
