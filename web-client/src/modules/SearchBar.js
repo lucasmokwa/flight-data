@@ -57,7 +57,7 @@ class SearchBar extends React.Component {
                     <input
                       type='text'
                       name='paid'
-                      placeholder='USD'
+                      placeholder='Usd'
                       value={this.state.paid}
                       onChange={(e) => {
                         this.setState({ paid: e.target.value });
