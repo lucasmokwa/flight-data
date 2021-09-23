@@ -1,20 +1,25 @@
 import React from "react";
 import axios from "axios";
 
-class App extends React.Component {
-  state = { paid: " ", price: " ", directPrice: " " };
+import SearchBar from "./SearchBar";
 
-  async getPriceData(origin, dest) {
+class App extends React.Component {
+  state = { paid: " ", price: " ", paid: "" };
+
+  priceData = async (origin, dest, paid) => {
     const response = await axios.get("http://localhost:4001/getPrice", {
       params: { origin, dest },
     });
-    console.log(response);
-    //this.setState({ price: 1 });
-  }
+    this.setState({ price: response.data.price, paid: paid });
+  };
 
   render() {
-    this.getPriceData("lax", "ord");
-    return <div>The result is {this.state.price} </div>;
+    return (
+      <div className='ui segment'>
+        <SearchBar onSearchSubmit={this.priceData} />
+        <div>{this.state.price}</div>
+      </div>
+    );
   }
 }
 
