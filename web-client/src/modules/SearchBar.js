@@ -12,7 +12,32 @@ class SearchBar extends React.Component {
     );
   };
 
+  onChangeOrigin = (e) => {
+    const str = e.target.value;
+    if (str.length > 3) {
+      return;
+    }
+    this.setState({ originInput: str.toUpperCase() });
+  };
+
+  onChangeDest = (e) => {
+    const str = e.target.value;
+    if (str.length > 3) {
+      return;
+    }
+    this.setState({ destInput: str.toUpperCase() });
+  };
+
+  onPaidChange = (e) => {
+    this.setState({ paid: e.target.value });
+  };
+
   render() {
+    let loading = "submit";
+    if (this.props.loading) {
+      loading = "loading";
+    }
+
     return (
       <div className='ui segment'>
         <div className='ui segment'>
@@ -33,9 +58,8 @@ class SearchBar extends React.Component {
                     name='origin'
                     placeholder='Origin'
                     value={this.state.originInput}
-                    onChange={(e) => {
-                      this.setState({ originInput: e.target.value });
-                    }}
+                    onChange={this.onChangeOrigin}
+                    required
                   />
                 </div>
                 <div className='field'>
@@ -44,9 +68,8 @@ class SearchBar extends React.Component {
                     name='dest'
                     placeholder='Destination'
                     value={this.state.destInput}
-                    onChange={(e) => {
-                      this.setState({ destInput: e.target.value });
-                    }}
+                    onChange={this.onChangeDest}
+                    required
                   />
                 </div>
               </div>
@@ -55,13 +78,11 @@ class SearchBar extends React.Component {
                 <div className='field'>
                   <div className='field'>
                     <input
-                      type='text'
+                      type='number'
                       name='paid'
                       placeholder='Usd'
                       value={this.state.paid}
-                      onChange={(e) => {
-                        this.setState({ paid: e.target.value });
-                      }}
+                      onChange={this.onPaidChange}
                     />
                   </div>
                 </div>
@@ -69,7 +90,7 @@ class SearchBar extends React.Component {
             </div>
           </form>
         </div>
-        <button form='airportCodes' className='ui submit button'>
+        <button form='airportCodes' className={`ui ${loading}  button`}>
           Submit
         </button>
       </div>

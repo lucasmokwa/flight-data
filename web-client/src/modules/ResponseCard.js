@@ -4,16 +4,18 @@ const ResponseCard = ({ price, paid, origin, dest, display }) => {
   if (display === false) {
     return null;
   }
-
-  let str = "";
-  const percentage = Math.abs(Math.round((paid / price - 1) * 100));
   const roundtrip = origin + "/" + dest;
-  if (paid > price) {
-    str = "more";
-  } else {
-    str = "less";
-  }
-  if (paid !== "") {
+
+  if (price !== null && paid !== "") {
+    //Percentage calculations
+    let str = "";
+    const percentage = Math.abs(Math.round((paid / price - 1) * 100));
+    if (paid > price) {
+      str = "more";
+    } else {
+      str = "less";
+    }
+    //start of actual return flow
     if (paid > price * 1.2) {
       return (
         <div class='ui error message'>
@@ -34,7 +36,7 @@ const ResponseCard = ({ price, paid, origin, dest, display }) => {
           </p>
         </div>
       );
-    } else if (paid !== "") {
+    } else {
       return (
         <div class='ui success message'>
           <div class='header'>You got a good price!</div>
@@ -46,14 +48,26 @@ const ResponseCard = ({ price, paid, origin, dest, display }) => {
       );
     }
   } else {
-    return (
-      <div class='ui success message'>
-        <div class='header'>Average price</div>
-        <p>
-          The average price for the {roundtrip} roundtrip was ${price}.
-        </p>
-      </div>
-    );
+    if (price !== null) {
+      return (
+        <div class='ui success message'>
+          <div class='header'>Average price</div>
+          <p>
+            The average price for the {roundtrip} roundtrip was ${price}.
+          </p>
+        </div>
+      );
+    } else {
+      return (
+        <div class='ui error message'>
+          <div class='header'>Couldn't find data</div>
+          <p>
+            Could not find data about the {roundtrip} trip. Either this route is
+            not popular or there is an error with the airport codes!
+          </p>
+        </div>
+      );
+    }
   }
 };
 
