@@ -19,20 +19,20 @@ const ResponseCard = ({ price, paid, origin, dest, display }) => {
     if (paid > price * 1.2) {
       return (
         <div className='ui error message'>
-          <div className='header'>You paid more than average!</div>
+          <div className='header'>You paid more than most people!</div>
           <p>
-            The average price for the {roundtrip} roundtrip was ${price}, and
-            you paid {percentage}% more!
+            The median price for the {roundtrip} roundtrip was ${price}, and you
+            paid {percentage}% more!
           </p>
         </div>
       );
     } else if (paid > price * 0.9) {
       return (
         <div className='ui warning message'>
-          <div className='header'>You got an average price!</div>
+          <div className='header'>You got an OK price!</div>
           <p>
-            The average price for the {roundtrip} roundtrip was ${price}, and
-            you paid {percentage}% {str}!
+            The median price for the {roundtrip} roundtrip was ${price}, and you
+            paid {percentage}% {str}!
           </p>
         </div>
       );
@@ -41,8 +41,8 @@ const ResponseCard = ({ price, paid, origin, dest, display }) => {
         <div className='ui success message'>
           <div className='header'>You got a good price!</div>
           <p>
-            The average price for the {roundtrip} roundtrip was ${price}, and
-            you paid {percentage}% {str}!
+            The median price for the {roundtrip} roundtrip was ${price}, and you
+            paid {percentage}% {str}!
           </p>
         </div>
       );
@@ -51,9 +51,9 @@ const ResponseCard = ({ price, paid, origin, dest, display }) => {
     if (price !== null) {
       return (
         <div className='ui success message'>
-          <div className='header'>Average price</div>
+          <div className='header'>Median price</div>
           <p>
-            The average price for the {roundtrip} roundtrip was ${price}.
+            The median price for the {roundtrip} roundtrip was ${price}.
           </p>
         </div>
       );
