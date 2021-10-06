@@ -84,7 +84,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-backend-api/node_modules
+backend-api/express-dev/node_modules
 backend-api/lambda/node_modules
 web-client/node_modules
 dbconfig.js
