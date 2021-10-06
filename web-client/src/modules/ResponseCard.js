@@ -18,7 +18,7 @@ const ResponseCard = ({ price, paid, origin, dest, display }) => {
     //start of actual return flow
     if (paid > price * 1.2) {
       return (
-        <div class='ui error message'>
+        <div className='ui error message'>
           <div className='header'>You paid more than average!</div>
           <p>
             The average price for the {roundtrip} roundtrip was ${price}, and
@@ -28,8 +28,8 @@ const ResponseCard = ({ price, paid, origin, dest, display }) => {
       );
     } else if (paid > price * 0.9) {
       return (
-        <div class='ui warning message'>
-          <div class='header'>You got an average price!</div>
+        <div className='ui warning message'>
+          <div className='header'>You got an average price!</div>
           <p>
             The average price for the {roundtrip} roundtrip was ${price}, and
             you paid {percentage}% {str}!
@@ -38,8 +38,8 @@ const ResponseCard = ({ price, paid, origin, dest, display }) => {
       );
     } else {
       return (
-        <div class='ui success message'>
-          <div class='header'>You got a good price!</div>
+        <div className='ui success message'>
+          <div className='header'>You got a good price!</div>
           <p>
             The average price for the {roundtrip} roundtrip was ${price}, and
             you paid {percentage}% {str}!
@@ -50,8 +50,8 @@ const ResponseCard = ({ price, paid, origin, dest, display }) => {
   } else {
     if (price !== null) {
       return (
-        <div class='ui success message'>
-          <div class='header'>Average price</div>
+        <div className='ui success message'>
+          <div className='header'>Average price</div>
           <p>
             The average price for the {roundtrip} roundtrip was ${price}.
           </p>
@@ -59,8 +59,8 @@ const ResponseCard = ({ price, paid, origin, dest, display }) => {
       );
     } else {
       return (
-        <div class='ui error message'>
-          <div class='header'>Couldn't find data</div>
+        <div className='ui error message'>
+          <div className='header'>Couldn't find data</div>
           <p>
             Could not find data about the {roundtrip} trip. Either this route is
             not popular or there is an error with the airport codes!
