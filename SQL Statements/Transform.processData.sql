@@ -52,7 +52,7 @@ BEGIN
 		(PARTITION BY         TD.Origin
 							,TD.Dest
 							,TD.Year
-							,TD.Quarter) AS Average
+							,TD.Quarter) AS Avg
 		,A.Passengers
 	INTO
 		Transform.Export
