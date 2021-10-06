@@ -16,6 +16,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "predeploy": "npm run build",
+    "deploy": "aws s3 sync build/ s3://ticket-price-react --delete",
+    "postdeploy": "aws cloudfront create-invalidation --distribution-id E32UD4Q174PP2B --paths /* && aws cloudfront create-invalidation --distribution-id EBZDG14XZ8DXS --paths /*",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
