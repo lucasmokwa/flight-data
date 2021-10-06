@@ -17,9 +17,13 @@ class App extends React.Component {
   priceData = async (origin, dest, paid) => {
     this.setState({ loading: true });
 
-    const response = await axios.get("http://localhost:4001/getPrice", {
-      params: { origin, dest },
-    });
+    const response = await axios.get(
+      "https://ticketpriceapi.lrmokwa.com/getprice",
+      {
+        params: { origin, dest },
+      }
+    );
+    console.log(response);
     this.setState({
       price: response.data.price,
       paid: paid,
